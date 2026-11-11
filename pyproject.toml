@@ -1,0 +1,32 @@
+[project]
+name = "advog-e2e"
+version = "0.1.0"
+description = "Testes de ponta a ponta (Selenium) do frontend do Advog"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pytest>=8.3",
+    "python-dotenv>=1.0",
+    "selenium>=4.25",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.8",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
+markers = [
+    "local: teste que pode rodar contra a URL local (URL_LOCAL)",
+    "producao: teste que pode rodar contra a URL de produção (URL_PRODUCAO)",
+    "escrita: teste que cria/apaga dados (em produção exige E2E_PERMITIR_ESCRITA_PRODUCAO=true)",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
